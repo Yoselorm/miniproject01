@@ -1,23 +1,32 @@
 import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Navigator from './Navigation/Navigator';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
+  const [workers, setworker] = useState([
+    {
+      name: 'Selorm',
+      age: 21,
+      occupation: "Software engineer",
+      id: uuidv4()
+    },
+    {
+      name: 'Ayornu',
+      age: 22,
+      occupation: "IT specialist",
+      id: uuidv4()
+    }
+  ])
+
+  const addWorker = (worker) => {
+    let newWorker = { ...worker, id: uuidv4() };
+    setworker([...workers, newWorker]);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigator workersData={workers} addWorker={addWorker} />
     </div>
   );
 }
